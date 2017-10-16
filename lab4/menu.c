@@ -15,14 +15,14 @@ typedef struct DataNode
     char*   cmd;
     char*   desc;
     int   (*handler)();
-} tDataNode
+} tDataNode;
 
-tDataNode*FindCmd(tLinkTable * head,char * cmd)
+tDataNode* FindCmd(tLinkTable * head, char * cmd)
 {
     tDataNode * pNode = (tDataNode*)GetLinkTableHead(head);
     while(pNode != NULL)
     {
-        if(!strcmp(pNode != cmd, cmd))
+        if(!strcmp(pNode->cmd, cmd))
         {
             return pNode;
         }
@@ -31,8 +31,25 @@ tDataNode*FindCmd(tLinkTable * head,char * cmd)
     return NULL;
 }
 
-s help cmd",help,&head[1]},
-    {"version","menu program v1.0",
+int ShowAllCmd(tLinkTable * head)
+{
+    tDataNode * pNode = (tDataNode*)GetLinkTableHead(head);
+    while(pNode != NULL)
+    {
+        printf("%s - %s\n",pNode->cmd,pNode->desc);
+        pNode = (tDataNode*)GetNextLinkTableNode(head,(tLink));
+    }
+    return 0;
+}
+
+int InitMenuData(tLinkTable ** ppLinkTable)
+{
+    *ppLinkTable = CreateLinkTable();
+    tDataNode* pNode = (tDataNode*)malloc(sizeof(tDataNode));
+    pNode->cmd = "help";
+    pNode->desc = "Menu List:";
+    pNode->handler = help;
+    AddLinkTableNode(*ppLink
 static tDataNode head[] =
 {
     {"help","this is help cmd",help,&head[1]},
